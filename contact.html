@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact AFP Manager</title>
+  <meta name="description" content="Get in touch about AFP Manager — we'll follow up by email." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  <script>
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark')
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-gray-100 dark:bg-gray-950">
+  <!-- Nav -->
+  <header class="border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950">
+        <img src="/assets/logo.png" alt="AFP Manager" class="w-8 h-8 rounded-lg object-contain" />
+        <span class="font-semibold text-gray-900 dark:text-white">AFP Manager</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+        >
+          <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+        <a
+          href="https://app.afpmanager.com/login"
+          class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+        >
+          Sign in
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Form -->
+  <section class="max-w-lg mx-auto px-6 pt-16 pb-24">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight text-center">Contact us</h1>
+    <p class="mt-3 text-gray-600 dark:text-gray-400 text-center">
+      Tell us a bit about your fleet and we'll follow up by email.
+    </p>
+
+    <form id="contact-form" class="mt-10 space-y-5">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Name</label>
+        <input
+          id="name" name="name" type="text" required autocomplete="name"
+          class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3.5 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          placeholder="Jane Smith"
+        />
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email</label>
+        <input
+          id="email" name="email" type="email" required autocomplete="email"
+          class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3.5 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          placeholder="jane@yourcompany.com"
+        />
+      </div>
+      <div>
+        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Phone</label>
+        <input
+          id="phone" name="phone" type="tel" required autocomplete="tel"
+          class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3.5 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          placeholder="(555) 555-5555"
+        />
+      </div>
+      <div>
+        <label for="dotNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">DOT number</label>
+        <input
+          id="dotNumber" name="dotNumber" type="text" required inputmode="numeric"
+          class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3.5 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          placeholder="1234567"
+        />
+      </div>
+      <div>
+        <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Company <span class="text-gray-400 font-normal">(optional)</span></label>
+        <input
+          id="company" name="company" type="text" autocomplete="organization"
+          class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3.5 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          placeholder="Your carrier's name"
+        />
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Message</label>
+        <textarea
+          id="message" name="message" required rows="4"
+          class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3.5 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          placeholder="What are you looking to solve?"
+        ></textarea>
+      </div>
+
+      <!-- Honeypot: hidden from real visitors, bots that auto-fill every
+           field trip this. Off-screen rather than display:none, since some
+           bots skip display:none fields. -->
+      <div class="absolute -left-[9999px]" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <!-- Cloudflare Turnstile — spam/bot check, on top of the honeypot above. -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAEBR6w208urTJOgK" data-theme="auto"></div>
+
+      <button
+        type="submit"
+        id="submit-button"
+        class="w-full text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed rounded-lg px-5 py-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+      >
+        Contact us today
+      </button>
+
+      <p id="form-status" class="text-sm text-center" role="status"></p>
+    </form>
+  </section>
+
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // TODO(Wayne): confirm this is the right public URL for the AFP Manager
+    // API in production before going live — update if it's different. Also
+    // note: the /api/leads endpoint won't work until the backend is actually
+    // deployed (see backend/api's CI, which stops at pushing the image to
+    // GHCR — it doesn't auto-deploy to your k3s cluster).
+    const API_URL = 'https://api.afpmanager.com/api/leads';
+
+    const form = document.getElementById('contact-form');
+    const submitButton = document.getElementById('submit-button');
+    const status = document.getElementById('form-status');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      submitButton.disabled = true;
+      status.textContent = '';
+      status.classList.remove('text-red-600', 'dark:text-red-400', 'text-green-600', 'dark:text-green-400');
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || 'Something went wrong. Please try again.');
+        }
+
+        form.reset();
+        status.textContent = "Thanks — we'll be in touch soon.";
+        status.classList.add('text-green-600', 'dark:text-green-400');
+      } catch (err) {
+        status.textContent = err.message || 'Something went wrong. Please try again.';
+        status.classList.add('text-red-600', 'dark:text-red-400');
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
